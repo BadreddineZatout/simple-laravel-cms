@@ -25,13 +25,18 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td class="table-data">{{ $item->title }}</td>
-                                        <td class="table-data">dummy link</td>
+                                        <td class="table-data">
+                                            <a href="{{ URL::to('/' . $item->slug) }}" target="_blank"
+                                                class="text-indigo-600 hover:text-indigo-900">
+                                                {{ $item->slug }}
+                                            </a>
+                                        </td>
                                         <td class="table-data">{!! $item->content !!}</td>
                                         <td class="table-data">
                                             <x-jet-button wire:click="updateShowModal({{ $item->id }})">
                                                 {{ __('Edit') }}
                                             </x-jet-button>
-                                            <x-jet-danger-button wire:click="deleteShowModal">
+                                            <x-jet-danger-button wire:click="deleteShowModal({{ $item->id }})">
                                                 {{ __('Delete') }}
                                                 </x-jet-button>
                                         </td>
@@ -112,6 +117,27 @@
                     {{ __('Create') }}
                 </x-jet-danger-button>
             @endif
+        </x-slot>
+    </x-jet-dialog-modal>
+
+    {{-- Delete Modal --}}
+    <x-jet-dialog-modal wire:model="modalConfirmDelete">
+        <x-slot name="title">
+            {{ __('Delete Page') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you want to delete this page? Once the page is deleted, all of its resources and data will be permanently deleted.') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="$toggle('modalConfirmDelete')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button class="ml-3" wire:click="delete" wire:loading.attr="disabled">
+                {{ __('Delete Page') }}
+            </x-jet-danger-button>
         </x-slot>
     </x-jet-dialog-modal>
 </div>
