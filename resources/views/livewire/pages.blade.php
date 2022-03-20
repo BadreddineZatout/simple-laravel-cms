@@ -5,10 +5,57 @@
         </x-jet-button>
     </div>
 
+    {{-- The data table --}}
+
+    <div class="flex flex-col">
+        <div class="my-2 overflow-x-auto sm:mx-6 lg:mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="table-head">Title</th>
+                                <th class="table-head">Link</th>
+                                <th class="table-head">Content</th>
+                                <th class="table-head"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @if ($data->count())
+                                @foreach ($data as $item)
+                                    <tr>
+                                        <td class="table-data">{{ $item->title }}</td>
+                                        <td class="table-data">dummy link</td>
+                                        <td class="table-data">{!! $item->content !!}</td>
+                                        <td class="table-data">
+                                            <x-jet-button wire:click="updateShowModal({{ $item->id }})">
+                                                {{ __('Edit') }}
+                                            </x-jet-button>
+                                            <x-jet-danger-button wire:click="deleteShowModal">
+                                                {{ __('Delete') }}
+                                                </x-jet-button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td class="table-data" colspan="4">No Results Found</td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    {{ $data->links() }}
+
     {{-- Modal Form --}}
     <x-jet-dialog-modal wire:model="modalFormVisible">
         <x-slot name="title">
-            {{ __('Save Page') }}
+            {{ __('Save Page') }} {{ $modelId }}
         </x-slot>
 
         <x-slot name="content">
@@ -56,9 +103,15 @@
                 {{ __('Cancel') }}
             </x-jet-secondary-button>
 
-            <x-jet-danger-button class="ml-3" wire:click="create" wire:loading.attr="disabled">
-                {{ __('Save') }}
-            </x-jet-danger-button>
+            @if ($modelId)
+                <x-jet-danger-button class="ml-3" wire:click="update" wire:loading.attr="disabled">
+                    {{ __('Upadte') }}
+                </x-jet-danger-button>
+            @else
+                <x-jet-danger-button class="ml-3" wire:click="create" wire:loading.attr="disabled">
+                    {{ __('Create') }}
+                </x-jet-danger-button>
+            @endif
         </x-slot>
     </x-jet-dialog-modal>
 </div>

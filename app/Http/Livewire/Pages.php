@@ -5,24 +5,17 @@ namespace App\Http\Livewire;
 use App\Models\Page;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Pages extends Component
 {
+    use WithPagination;
+
     public $modalFormVisible = false;
+    public $modelId;
     public $title;
     public $slug;
     public $content;
-
-    /**
-     * Show the form modal
-     * of the create function.
-     *
-     * @return void
-     */
-    public function createShowModal()
-    {
-        $this->modalFormVisible = true;
-    }
 
     /**
      * validation rules
@@ -36,6 +29,44 @@ class Pages extends Component
             'slug' => ['required', Rule::unique('pages', 'slug')],
             'content' => 'required',
         ];
+    }
+
+    /**
+     * the livewire mount function
+     *
+     * @return void
+     */
+    public function mount()
+    {
+        $this->resetPage();
+    }
+
+    /**
+     * Show the form modal
+     * of the create function.
+     *
+     * @return void
+     */
+    public function createShowModal()
+    {
+        $this->modalFormVisible = true;
+    }
+
+    /**
+     * Show the form modal
+     * of the update function
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function updateShowModal($id)
+    {
+        $this->modelId = $id;
+        $data = Page::find($this->modelId);
+        $this->modalFormVisible = true;
+        $this->title = $data->title;
+        $this->slug = $data->slug;
+        $this->content = $data->content;
     }
 
     /**
@@ -79,12 +110,47 @@ class Pages extends Component
     }
 
     /**
+     * read pages from database
+     *
+     * @return void
+     */
+    public function read()
+    {
+        return Page::paginate(5);
+    }
+
+    /**
+     * update an existing page
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function update()
+    {
+        Page::where('id', $this->modelId)
+            ->update([
+                'title' => $this->title,
+                'slug' => $this->slug,
+                'content' => $this->content
+            ]);
+        $this->cleanAfterUpdate();
+    }
+
+    public function cleanAfterUpdate()
+    {
+        $this->modelId = null;
+        $this->cleanAfterCreate();
+    }
+
+    /**
      * The livewire render function.
      *
      * @return void
      */
     public function render()
     {
-        return view('livewire.pages');
+        return view('livewire.pages', [
+            'data' => $this->read()
+        ]);
     }
 }
