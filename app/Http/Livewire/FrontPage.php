@@ -16,7 +16,7 @@ class FrontPage extends Component
      * @param  mixed $urlslug
      * @return void
      */
-    public function mount($urlslug = '')
+    public function mount($urlslug = null)
     {
         $this->getContent($urlslug);
     }
@@ -29,7 +29,12 @@ class FrontPage extends Component
      */
     public function getContent($urlslug)
     {
-        $page = Page::where('slug', $urlslug)->firstOrFail();
+        $page = empty($urlslug)
+            ? Page::where('is_default_home', true)->first()
+            : Page::where('slug', $urlslug)->first();
+        if (!$page) {
+            $page = Page::where('is_default_404', true)->firstOrFail();
+        }
         $this->title = $page->title;
         $this->content = $page->content;
     }

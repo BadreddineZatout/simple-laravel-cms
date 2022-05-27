@@ -3,9 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\Page;
-use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
 
 class Pages extends Component
 {
@@ -52,7 +53,8 @@ class Pages extends Component
      */
     public function createShowModal()
     {
-        if ($this->modelId) $this->cleanAfterUpdate();
+        $this->resetValidation();
+        $this->reset();
         $this->modalFormVisible = true;
     }
 
@@ -65,6 +67,9 @@ class Pages extends Component
      */
     public function updateShowModal($id)
     {
+        $this->resetValidation();
+        $this->reset();
+
         $this->modelId = $id;
         $data = Page::find($this->modelId);
         $this->modalFormVisible = true;
@@ -95,7 +100,7 @@ class Pages extends Component
      */
     public function updatedTitle($value)
     {
-        $this->slug = strtolower(str_replace(' ', '-', $value));
+        $this->slug = Str::slug($value);
     }
 
     /**
@@ -173,22 +178,7 @@ class Pages extends Component
         $this->unassignDefaultHomePage();
         $this->unassignDefault404Page();
         Page::create($this->modelData());
-        $this->cleanAfterCreate();
-    }
-
-    /**
-     * Reset vars after page create
-     *
-     * @return void
-     */
-    public function cleanAfterCreate()
-    {
-        $this->modalFormVisible = false;
-        $this->title = "";
-        $this->slug = "";
-        $this->content = "";
-        $this->isDefaultHome = null;
-        $this->isDefault404 = null;
+        $this->reset();
     }
 
     /**
@@ -214,18 +204,7 @@ class Pages extends Component
         $this->unassignDefault404Page();
         Page::where('id', $this->modelId)
             ->update($this->modelData());
-        $this->cleanAfterUpdate();
-    }
-
-    /**
-     * Reset vars after page update
-     *
-     * @return void
-     */
-    public function cleanAfterUpdate()
-    {
-        $this->modelId = null;
-        $this->cleanAfterCreate();
+        $this->reset();
     }
 
     /**
