@@ -131,7 +131,7 @@ class Pages extends Component
     public function unassignDefaultHomePage()
     {
         if ($this->isDefaultHome) {
-            Page::where('is_default_home', true)->update([
+            Page::defaultHome()->update([
                 'is_default_home' => null
             ]);
         }
@@ -145,7 +145,7 @@ class Pages extends Component
     public function unassignDefault404Page()
     {
         if ($this->isDefault404) {
-            Page::where('is_default_404', true)->update([
+            Page::default404()->update([
                 'is_default_404' => null
             ]);
         }

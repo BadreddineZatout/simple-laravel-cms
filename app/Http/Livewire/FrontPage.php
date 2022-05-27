@@ -30,10 +30,10 @@ class FrontPage extends Component
     public function getContent($urlslug)
     {
         $page = empty($urlslug)
-            ? Page::where('is_default_home', true)->first()
+            ? Page::defaultHome()->first()
             : Page::where('slug', $urlslug)->first();
         if (!$page) {
-            $page = Page::where('is_default_404', true)->firstOrFail();
+            $page = Page::default404()->firstOrFail();
         }
         $this->title = $page->title;
         $this->content = $page->content;
