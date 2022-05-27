@@ -21,22 +21,22 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @if ($data->count())
-                                @foreach ($data as $item)
+                            @if ($pages->count())
+                                @foreach ($pages as $page)
                                     <tr>
-                                        <td class="table-data">{{ $item->title }}</td>
+                                        <td class="table-data">{{ $page->title }}</td>
                                         <td class="table-data">
-                                            <a href="{{ URL::to('/' . $item->slug) }}" target="_blank"
+                                            <a href="{{ URL::to('/' . $page->slug) }}" target="_blank"
                                                 class="text-indigo-600 hover:text-indigo-900">
-                                                {{ $item->slug }}
+                                                {{ $page->slug }}
                                             </a>
                                         </td>
-                                        <td class="table-data">{!! $item->content !!}</td>
+                                        <td class="table-data">{!! $page->content !!}</td>
                                         <td class="table-data">
-                                            <x-jet-button wire:click="updateShowModal({{ $item->id }})">
+                                            <x-jet-button wire:click="updateShowModal({{ $page->id }})">
                                                 {{ __('Edit') }}
                                             </x-jet-button>
-                                            <x-jet-danger-button wire:click="deleteShowModal({{ $item->id }})">
+                                            <x-jet-danger-button wire:click="deleteShowModal({{ $page->id }})">
                                                 {{ __('Delete') }}
                                                 </x-jet-button>
                                         </td>
@@ -55,7 +55,7 @@
     </div>
 
     <br />
-    {{ $data->links() }}
+    {{ $pages->links() }}
 
     {{-- Modal Form --}}
     <x-jet-dialog-modal wire:model="modalFormVisible">

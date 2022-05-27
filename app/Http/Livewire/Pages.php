@@ -181,7 +181,7 @@ class Pages extends Component
     public function render()
     {
         return view('livewire.pages', [
-            'data' => $this->read()
+            'pages' => $this->read()
         ]);
     }
 }
