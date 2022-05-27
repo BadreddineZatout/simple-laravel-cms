@@ -17,6 +17,8 @@ class Pages extends Component
     public $title;
     public $slug;
     public $content;
+    public $isDefaultHome;
+    public $isDefault404;
 
     /**
      * validation rules
@@ -50,6 +52,7 @@ class Pages extends Component
      */
     public function createShowModal()
     {
+        if ($this->modelId) $this->cleanAfterUpdate();
         $this->modalFormVisible = true;
     }
 
@@ -68,6 +71,8 @@ class Pages extends Component
         $this->title = $data->title;
         $this->slug = $data->slug;
         $this->content = $data->content;
+        $this->isDefaultHome = $data->is_default_home;
+        $this->isDefault404 = $data->is_default_404;
     }
 
     /**
@@ -94,6 +99,70 @@ class Pages extends Component
     }
 
     /**
+     * runs when isDefaultHome value changes
+     *
+     * @return void
+     */
+    public function updatedIsDefaultHome()
+    {
+        $this->isDefault404 = null;
+    }
+
+    /**
+     * runs when isDefaul404 value changes
+     *
+     * @return void
+     */
+    public function updatedIsDefault404()
+    {
+        $this->isDefaultHome = null;
+    }
+
+    /**
+     * Unassign the default home page in the pages table
+     *
+     * @return void
+     */
+    public function unassignDefaultHomePage()
+    {
+        if ($this->isDefaultHome) {
+            Page::where('is_default_home', true)->update([
+                'is_default_home' => null
+            ]);
+        }
+    }
+
+    /**
+     * Unassign the default 404 page in the pages table
+     *
+     * @return void
+     */
+    public function unassignDefault404Page()
+    {
+        if ($this->isDefault404) {
+            Page::where('is_default_404', true)->update([
+                'is_default_404' => null
+            ]);
+        }
+    }
+
+    /**
+     * get the model data
+     *
+     * @return void
+     */
+    public function modelData()
+    {
+        return [
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'content' => $this->content,
+            'is_default_home' => $this->isDefaultHome,
+            'is_default_404' => $this->isDefault404,
+        ];
+    }
+
+    /**
      * create a new page
      *
      * @return void
@@ -101,11 +170,9 @@ class Pages extends Component
     public function create()
     {
         $this->validate();
-        Page::create([
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'content' => $this->content
-        ]);
+        $this->unassignDefaultHomePage();
+        $this->unassignDefault404Page();
+        Page::create($this->modelData());
         $this->cleanAfterCreate();
     }
 
@@ -120,6 +187,8 @@ class Pages extends Component
         $this->title = "";
         $this->slug = "";
         $this->content = "";
+        $this->isDefaultHome = null;
+        $this->isDefault404 = null;
     }
 
     /**
@@ -141,12 +210,10 @@ class Pages extends Component
     public function update()
     {
         $this->validate();
+        $this->unassignDefaultHomePage();
+        $this->unassignDefault404Page();
         Page::where('id', $this->modelId)
-            ->update([
-                'title' => $this->title,
-                'slug' => $this->slug,
-                'content' => $this->content
-            ]);
+            ->update($this->modelData());
         $this->cleanAfterUpdate();
     }
 

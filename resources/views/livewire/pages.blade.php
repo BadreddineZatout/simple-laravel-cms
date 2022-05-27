@@ -24,7 +24,11 @@
                             @if ($pages->count())
                                 @foreach ($pages as $page)
                                     <tr>
-                                        <td class="table-data">{{ $page->title }}</td>
+                                        <td class="table-data">
+                                            {{ $page->title }}
+                                            {!! $page->is_default_home ? '<span class="text-green-600 text-sm font-bold">[Default Home Page]</span>' : '' !!}
+                                            {!! $page->is_default_404 ? '<span class="text-red-600 text-sm font-bold">[Default 404 Error Page]</span>' : '' !!}
+                                        </td>
                                         <td class="table-data">
                                             <a href="{{ URL::to('/' . $page->slug) }}" target="_blank"
                                                 class="text-indigo-600 hover:text-indigo-900">
@@ -32,7 +36,7 @@
                                             </a>
                                         </td>
                                         <td class="table-data">{!! $page->content !!}</td>
-                                        <td class="table-data">
+                                        <td class="table-data flex justify-end gap-2">
                                             <x-jet-button wire:click="updateShowModal({{ $page->id }})">
                                                 {{ __('Edit') }}
                                             </x-jet-button>
@@ -86,6 +90,20 @@
                 @error('slug')
                     <span class="error">{{ $message }}</span>
                 @enderror
+            </div>
+            <div class="mt-4">
+                <label>
+                    <input class="form-checkbox" type="checkbox" value="{{ $isDefaultHome }}"
+                        wire:model="isDefaultHome">
+                    <span class="ml-2 text-sm text-gray-600">Set as the default home page</span>
+                </label>
+            </div>
+            <div class="mt-4">
+                <label>
+                    <input class="form-checkbox" type="checkbox" value="{{ $isDefault404 }}"
+                        wire:model="isDefault404">
+                    <span class="ml-2 text-sm text-red-600">Set as the default 404 error page</span>
+                </label>
             </div>
             <div class="mt-4">
                 <x-jet-label for="title" value="{{ __('Content') }}" />
