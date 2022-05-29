@@ -1371,6 +1371,10 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
+.border-orange-50 {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 247 237 / var(--tw-border-opacity));
+}
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1418,6 +1422,22 @@ select {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+.bg-PrussianBlue {
+  --tw-bg-opacity: 1;
+  background-color: rgb(1 59 87 / var(--tw-bg-opacity));
+}
+.bg-Champagne {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 230 204 / var(--tw-bg-opacity));
+}
+.bg-PinkLavender {
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 186 198 / var(--tw-bg-opacity));
+}
+.bg-MediumCarmine {
+  --tw-bg-opacity: 1;
+  background-color: rgb(166 73 43 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -1673,6 +1693,14 @@ select {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
+.text-Champagne {
+  --tw-text-opacity: 1;
+  color: rgb(247 230 204 / var(--tw-text-opacity));
+}
+.text-PinkLavender {
+  --tw-text-opacity: 1;
+  color: rgb(216 186 198 / var(--tw-text-opacity));
+}
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -1833,6 +1861,12 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.hover\:font-semibold:hover {
+  font-weight: 600;
+}
+.hover\:font-bold:hover {
+  font-weight: 700;
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1856,6 +1890,14 @@ select {
 .hover\:text-indigo-900:hover {
   --tw-text-opacity: 1;
   color: rgb(49 46 129 / var(--tw-text-opacity));
+}
+.hover\:text-MediumCarmine:hover {
+  --tw-text-opacity: 1;
+  color: rgb(166 73 43 / var(--tw-text-opacity));
+}
+.hover\:text-DarkChestnut:hover {
+  --tw-text-opacity: 1;
+  color: rgb(151 117 99 / var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
   z-index: 10;
