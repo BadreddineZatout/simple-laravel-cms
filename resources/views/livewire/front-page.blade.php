@@ -1,13 +1,17 @@
-<div class="sm:divide-y sm:divide-PinkLavender">
+<div class="sm:divide-y sm:divide-PinkLavender" x-data="{
+    show: false
+}">
     <nav class="bg-PrussianBlue px-3 py-2 flex justify-between items-center shadow-lg">
         <div class="flex items-center">
             <div class="sm:hidden">
-                <button class="block h-8 mr-3 text-Champagne items-center hover:text-DarkChestnut">
+                <button class="block h-8 mr-3 text-Champagne items-center hover:text-DarkChestnut" @click="show = !show">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        <path x-show="!show" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16">
                         </path>
+                        <path x-show="show" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h7"></path>
                     </svg>
                 </button>
             </div>
@@ -42,7 +46,7 @@
                 </a>
             </ul>
             {{-- Mobile Web View --}}
-            <div class="pb-3 divide-y divide-PinkLavender block sm:hidden">
+            <div x-show='show' class="pb-3 divide-y divide-PinkLavender block sm:hidden">
                 <ul class="text-md text-Champagne">
                     <a href="{{ url('/home') }}">
                         <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Home</li>
