@@ -24,10 +24,13 @@
 
         <div class='sm:flex justify-end hidden'>
             {{-- Top Navigation --}}
-            <ul class="text-md text-Champagne">
-                <a href="{{ url('/login') }}">
-                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Login</li>
-                </a>
+            <ul class="text-md text-Champagne sm:flex sm:text-left">
+                @foreach ($topLinks as $topLink)
+                    <a href="{{ url('/' . $topLink->slug) }}">
+                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">
+                            {{ $topLink->label }}</li>
+                    </a>
+                @endforeach
             </ul>
         </div>
     </nav>
@@ -35,28 +38,22 @@
         <aside class="bg-PrussianBlue divide-y divide-dashed divide-PinkLavender sm:w-4/12 md:w-3/12 lg:w-2/12">
             {{-- Desktop Web View --}}
             <ul class="hidden text-Champagne sm:block sm:pl-5 sm:text-left">
-                <a href="{{ url('/home') }}">
-                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Home</li>
-                </a>
-                <a href="{{ url('/about') }}">
-                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">About</li>
-                </a>
-                <a href="{{ url('/contact') }}">
-                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Contact</li>
-                </a>
+                @foreach ($sidebarLinks as $sidebarLink)
+                    <a href="{{ url('/' . $sidebarLink->slug) }}">
+                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">
+                            {{ $sidebarLink->label }}</li>
+                    </a>
+                @endforeach
             </ul>
             {{-- Mobile Web View --}}
             <div x-show='show' class="pb-3 divide-y divide-PinkLavender block sm:hidden">
                 <ul class="text-md text-Champagne">
-                    <a href="{{ url('/home') }}">
-                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Home</li>
-                    </a>
-                    <a href="{{ url('/about') }}">
-                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">About</li>
-                    </a>
-                    <a href="{{ url('/contact') }}">
-                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Contact</li>
-                    </a>
+                    @foreach ($sidebarLinks as $sidebarLink)
+                        <a href="{{ url('/' . $sidebarLink->slug) }}">
+                            <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">
+                                {{ $sidebarLink->label }}</li>
+                        </a>
+                    @endforeach
                 </ul>
                 {{-- Top Navigation Mobile Web View --}}
                 <ul class="text-md text-Champagne">

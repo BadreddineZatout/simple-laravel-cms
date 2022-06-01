@@ -30,7 +30,7 @@ class NavigationMenus extends Component
     {
         return [
             'label' => 'required',
-            'slug' => ['required', Rule::unique('navigation_menus', 'slug')->ignore($this->modelId)],
+            'slug' => 'required',
             'sequence' => ['required', 'numeric'],
             'type' => 'required',
         ];

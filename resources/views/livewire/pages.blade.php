@@ -35,7 +35,7 @@
                                                 {{ $page->slug }}
                                             </a>
                                         </td>
-                                        <td class="table-data">{!! $page->content !!}</td>
+                                        <td class="table-data">{!! \Illuminate\Support\Str::limit($page->content, 50, '...') !!}</td>
                                         <td class="table-data flex justify-end gap-2">
                                             <x-jet-button wire:click="updateShowModal({{ $page->id }})">
                                                 {{ __('Edit') }}

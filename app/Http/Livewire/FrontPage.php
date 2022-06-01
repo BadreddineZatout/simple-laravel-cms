@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\NavigationMenu;
 use App\Models\Page;
 use Livewire\Component;
 
@@ -19,6 +20,26 @@ class FrontPage extends Component
     public function mount($urlslug = null)
     {
         $this->getContent($urlslug);
+    }
+
+    /**
+     * get the sidebar links
+     *
+     * @return void
+     */
+    private function getSidebarLinks()
+    {
+        return NavigationMenu::where('type', 'Sidebar')->orderBy('sequence', 'asc')->get();
+    }
+
+    /**
+     * get the top bar links
+     *
+     * @return void
+     */
+    private function getTopLinks()
+    {
+        return NavigationMenu::where('type', 'Top')->orderBy('sequence', 'asc')->get();
     }
 
     /**
@@ -41,6 +62,9 @@ class FrontPage extends Component
 
     public function render()
     {
-        return view('livewire.front-page')->layout('layouts.my-app');
+        return view('livewire.front-page', [
+            'sidebarLinks' => $this->getSidebarLinks(),
+            'topLinks' => $this->getTopLinks()
+        ])->layout('layouts.my-app');
     }
 }
