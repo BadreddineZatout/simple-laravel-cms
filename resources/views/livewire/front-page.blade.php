@@ -1,4 +1,4 @@
-<div>
+<div class="sm:divide-y sm:divide-PinkLavender">
     <nav class="bg-PrussianBlue px-3 py-2 flex justify-between items-center shadow-lg">
         <div class="flex items-center">
             <div class="sm:hidden">
@@ -21,23 +21,54 @@
         <div class='sm:flex justify-end hidden'>
             {{-- Top Navigation --}}
             <ul class="text-md text-Champagne">
-                <a>
+                <a href="{{ url('/login') }}">
                     <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Login</li>
                 </a>
             </ul>
         </div>
     </nav>
-    <div>
-        <aside>
-
+    <div class="sm:flex sm:min-h-screen">
+        <aside class="bg-PrussianBlue divide-y divide-dashed divide-PinkLavender sm:w-4/12 md:w-3/12 lg:w-2/12">
+            {{-- Desktop Web View --}}
+            <ul class="hidden text-Champagne sm:block sm:pl-5 sm:text-left">
+                <a href="{{ url('/home') }}">
+                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Home</li>
+                </a>
+                <a href="{{ url('/about') }}">
+                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">About</li>
+                </a>
+                <a href="{{ url('/contact') }}">
+                    <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Contact</li>
+                </a>
+            </ul>
+            {{-- Mobile Web View --}}
+            <div class="pb-3 divide-y divide-PinkLavender block sm:hidden">
+                <ul class="text-md text-Champagne">
+                    <a href="{{ url('/home') }}">
+                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Home</li>
+                    </a>
+                    <a href="{{ url('/about') }}">
+                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">About</li>
+                    </a>
+                    <a href="{{ url('/contact') }}">
+                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Contact</li>
+                    </a>
+                </ul>
+                {{-- Top Navigation Mobile Web View --}}
+                <ul class="text-md text-Champagne">
+                    <a href="{{ url('/login') }}">
+                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Login</li>
+                    </a>
+                </ul>
+            </div>
         </aside>
+        <main class="p-14 min-h-screen sm:w-8/12 md:w-9/12 lg:w-10/12">
+            <section class="divide-y divide-DarkChestnut ">
+                <h1 class="text-3xl font-bold text-PrussianBlue">{{ $title }}</h1>
+                <article class="mt-5 text-sm md:text-base">
+                    {!! $content !!}
+                </article>
+            </section>
+        </main>
     </div>
-    <main>
-        <section>
-            <h1>{{ $title }}</h1>
-            <article>
-                {!! $content !!}
-            </article>
-        </section>
-    </main>
 </div>
