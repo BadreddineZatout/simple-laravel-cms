@@ -128,7 +128,7 @@
 
             @if ($modelId)
                 <x-jet-danger-button class="ml-3" wire:click="update" wire:loading.attr="disabled">
-                    {{ __('Upadte') }}
+                    {{ __('Update') }}
                 </x-jet-danger-button>
             @else
                 <x-jet-danger-button class="ml-3" wire:click="create" wire:loading.attr="disabled">
