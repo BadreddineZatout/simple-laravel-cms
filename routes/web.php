@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => [
     'auth:sanctum',
     'verified',
+    'roleaccess'
 ]], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
