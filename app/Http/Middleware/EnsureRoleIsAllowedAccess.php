@@ -30,7 +30,7 @@ class EnsureRoleIsAllowedAccess
     {
         return [
             'user' => ['dashboard'],
-            'admin' => ['pages', 'navigation-menus']
+            'admin' => ['pages', 'navigation-menus', 'users', 'user-permissions']
         ];
     }
 }

@@ -22,12 +22,16 @@ Route::group(['middleware' => [
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('pages', function () {
+    Route::get('/pages', function () {
         return view('admin.pages');
     })->name('pages');
-    Route::get('navigation-menus', function () {
+    Route::get('/navigation-menus', function () {
         return view('admin.navigation-menus');
     })->name('navigation-menus');
+    Route::view('/users', 'admin.users')
+        ->name('users');
+    Route::view('/user-permissions', 'admin.user-permissions')
+        ->name('user-permissions');
 });
 
 Route::get('/{urlslug}', FrontPage::class);
