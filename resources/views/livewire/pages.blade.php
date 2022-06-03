@@ -1,5 +1,8 @@
 <div class="p-6">
     <div class="flex items-centre justify-end px-4 py-3 sm:py-6 text-right">
+        <x-jet-button wire:click="dispatchEvent">
+            {{ __('Dispatch event') }}
+        </x-jet-button>
         <x-jet-button wire:click="createShowModal">
             {{ __('Create') }}
         </x-jet-button>

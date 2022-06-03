@@ -1,0 +1,19 @@
+{
+    "name": "websocket-cms",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon notificationsServer.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "html-entities": "^2.3.3",
+        "websocket": "^1.0.34"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.16"
+    }
+}

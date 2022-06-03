@@ -219,6 +219,14 @@ class Pages extends Component
         $this->modelId = null;
     }
 
+    public function dispatchEvent()
+    {
+        $this->dispatchBrowserEvent('event-notification', [
+            'eventName' => 'Sample Event',
+            'eventMessage' => 'You have a sample event notification!'
+        ]);
+    }
+
     /**
      * The livewire render function.
      *
