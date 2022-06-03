@@ -178,6 +178,10 @@ class Pages extends Component
         $this->unassignDefaultHomePage();
         $this->unassignDefault404Page();
         Page::create($this->modelData());
+        $this->dispatchBrowserEvent('event-notification', [
+            'eventName' => 'New Page :D',
+            'eventMessage' => 'A new page has been created!'
+        ]);
         $this->reset();
     }
 
@@ -204,6 +208,10 @@ class Pages extends Component
         $this->unassignDefault404Page();
         Page::where('id', $this->modelId)
             ->update($this->modelData());
+        $this->dispatchBrowserEvent('event-notification', [
+            'eventName' => 'Updated Page :D',
+            'eventMessage' => 'The page "' . $this->title . '" has been updated!'
+        ]);
         $this->reset();
     }
 
@@ -215,16 +223,11 @@ class Pages extends Component
     public function delete()
     {
         Page::destroy($this->modelId);
-        $this->modalConfirmDelete = false;
-        $this->modelId = null;
-    }
-
-    public function dispatchEvent()
-    {
         $this->dispatchBrowserEvent('event-notification', [
-            'eventName' => 'Sample Event',
-            'eventMessage' => 'You have a sample event notification!'
+            'eventName' => 'Page Deleted :,(',
+            'eventMessage' => 'The page "' . $this->modelId . '" has been deleted!'
         ]);
+        $this->reset();
     }
 
     /**

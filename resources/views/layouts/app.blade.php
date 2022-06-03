@@ -37,6 +37,7 @@
 
         <!-- Page Content -->
         <main>
+            <div class="event-notification-box transform duration-700 opacity-0"></div>
             {{ $slot }}
         </main>
     </div>
@@ -45,25 +46,7 @@
 
     @livewireScripts
 </body>
-<script>
-    let clientSocket = (config = {}) => {
-        let route = config.route || "127.0.0.1";
-        let port = config.port || 3280;
-        window.Websocket = window.Websocket || window.MozWebSocket;
-        return new WebSocket('ws://' + route + ":" + port);
-    }
-
-    let connection = clientSocket();
-    connection.onopen = () => {
-        console.log("Connecion is open!");
-    }
-
-    window.addEventListener('event-notification', event => {
-        connection.send(JSON.stringify({
-            eventName: event.detail.eventName,
-            eventMessage: event.detail.eventMessage
-        }))
-    })
-</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+crossorigin="anonymous"></script>
 
 </html>

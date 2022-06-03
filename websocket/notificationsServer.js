@@ -19,7 +19,16 @@ wsServer.on("request", (req) => {
     console.log("Client", index, "connected");
 
     connection.on("message", (message) => {
-        console.log(message);
+        let utf8Data = JSON.parse(message.utf8Data);
+        if (message.type == "utf8") {
+            let obj = JSON.stringify({
+                eventName: htmlEntity.encode(utf8Data.eventName),
+                eventMessage: htmlEntity.encode(utf8Data.eventMessage),
+            });
+            clients.forEach((client) => {
+                client.sendUTF(obj);
+            });
+        }
     });
 
     connection.on("close", (connection) => {

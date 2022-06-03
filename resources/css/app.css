@@ -22,3 +22,7 @@
 .table-data {
     @apply px-6 py-4 text-sm whitespace-nowrap;
 }
+
+.event-notification-box {
+    @apply fixed right-0 top-0 mt-3 mr-3 px-5 py-3 rounded-sm shadow-lg text-white bg-green-500;
+}
