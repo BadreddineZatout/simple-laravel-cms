@@ -2,19 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\UserPermission;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Users extends Component
+class UserPermissions extends Component
 {
     use WithPagination;
 
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
-    public $name;
     public $role;
+    public $route_name;
 
     /**
      * Put your custom public properties here!
@@ -28,8 +28,8 @@ class Users extends Component
     public function rules()
     {
         return [
-            'name' => ['required', 'max:255'],
-            'role' => 'required'
+            'role' => 'required',
+            'route_name' => 'required'
         ];
     }
 
@@ -41,9 +41,9 @@ class Users extends Component
      */
     public function loadModel()
     {
-        $user = User::find($this->modelId);
-        $this->name = $user->name;
-        $this->role = $user->role;
+        $role_permission = UserPermission::find($this->modelId);
+        $this->role = $role_permission->role;
+        $this->route_name = $role_permission->route_name;
     }
 
     /**
@@ -55,8 +55,8 @@ class Users extends Component
     public function modelData()
     {
         return [
-            'name' => $this->name,
-            'role' => $this->role
+            'role' => $this->role,
+            'route_name' => $this->route_name
         ];
     }
 
@@ -68,7 +68,7 @@ class Users extends Component
     public function create()
     {
         $this->validate();
-        User::create($this->modelData());
+        UserPermission::create($this->modelData());
         $this->modalFormVisible = false;
         $this->reset();
     }
@@ -80,7 +80,7 @@ class Users extends Component
      */
     public function read()
     {
-        return User::paginate(5);
+        return UserPermission::paginate(5);
     }
 
     /**
@@ -91,7 +91,7 @@ class Users extends Component
     public function update()
     {
         $this->validate();
-        User::find($this->modelId)->update($this->modelData());
+        UserPermission::find($this->modelId)->update($this->modelData());
         $this->modalFormVisible = false;
     }
 
@@ -102,7 +102,7 @@ class Users extends Component
      */
     public function delete()
     {
-        User::destroy($this->modelId);
+        UserPermission::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
         $this->resetPage();
     }
@@ -149,7 +149,7 @@ class Users extends Component
 
     public function render()
     {
-        return view('livewire.users', [
+        return view('livewire.user-permissions', [
             'data' => $this->read(),
         ]);
     }
