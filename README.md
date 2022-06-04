@@ -22,4 +22,4 @@ Here are the credentials for some users:
 -   Many CRUDs (Pages CRUD, Users CRUD...)
 -   Role permissions managment
 -   Notification push usign nodejs & web sockets
--   Costume commande to create livewire CRUD components : php artisan maek:livewire:crud [class-name] [model-name]
+-   Costume commande to create livewire CRUD components : `php artisan maek:livewire:crud [class-name] [model-name]`
