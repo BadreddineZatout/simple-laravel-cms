@@ -56,11 +56,13 @@
                     @endforeach
                 </ul>
                 {{-- Top Navigation Mobile Web View --}}
-                <ul class="text-md text-Champagne">
-                    <a href="{{ url('/login') }}">
-                        <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Login</li>
-                    </a>
-                </ul>
+                @guest
+                    <ul class="text-md text-Champagne">
+                        <a href="{{ url('/login') }}">
+                            <li class="cursor-pointer px-4 py-3 hover:text-MediumCarmine hover:font-bold">Login</li>
+                        </a>
+                    </ul>
+                @endguest
             </div>
         </aside>
         <main class="p-14 min-h-screen sm:w-8/12 md:w-9/12 lg:w-10/12">

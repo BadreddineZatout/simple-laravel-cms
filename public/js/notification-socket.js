@@ -10,6 +10,7 @@ connection.onopen = () => {
     console.log("Connecion is open!");
 };
 
+//create notification
 connection.onmessage = (message) => {
     let result = JSON.parse(message.data);
 
@@ -26,6 +27,7 @@ connection.onmessage = (message) => {
     }, 3000);
 };
 
+//page creation event listner
 window.addEventListener("event-notification", (event) => {
     connection.send(
         JSON.stringify({

@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\NavigationMenu;
 use App\Models\Page;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class FrontPage extends Component
@@ -39,6 +40,8 @@ class FrontPage extends Component
      */
     private function getTopLinks()
     {
+        if (Auth::check())
+            return NavigationMenu::where('type', 'Top')->where('slug', '!=', 'login')->orderBy('sequence', 'asc')->get();
         return NavigationMenu::where('type', 'Top')->orderBy('sequence', 'asc')->get();
     }
 

@@ -5643,8 +5643,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
-__webpack_require__(/*! ./notification-socket */ "./resources/js/notification-socket.js");
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5675,46 +5673,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/notification-socket.js":
-/*!*********************************************!*\
-  !*** ./resources/js/notification-socket.js ***!
-  \*********************************************/
-/***/ (() => {
-
-var clientSocket = function clientSocket() {
-  var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var route = config.route || "127.0.0.1";
-  var port = config.port || 3280;
-  window.Websocket = window.Websocket || window.MozWebSocket;
-  return new WebSocket("ws://" + route + ":" + port);
-};
-
-var connection = clientSocket();
-
-connection.onopen = function () {
-  console.log("Connecion is open!");
-};
-
-connection.onmessage = function (message) {
-  var result = JSON.parse(message.data);
-  $(".event-notification-box").html("\n        <h3>".concat(result.eventName, "</h3>\n        <p>").concat(result.eventMessage, "</p>\n    "));
-  $(".event-notification-box").removeClass("opacity-0");
-  $(".event-notification-box").addClass("opacity-100");
-  setTimeout(function () {
-    $(".event-notification-box").removeClass("opacity-100");
-    $(".event-notification-box").addClass("opacity-0");
-  }, 3000);
-};
-
-window.addEventListener("event-notification", function (event) {
-  connection.send(JSON.stringify({
-    eventName: event.detail.eventName,
-    eventMessage: event.detail.eventMessage
-  }));
-});
 
 /***/ }),
 
