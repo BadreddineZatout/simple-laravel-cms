@@ -9,6 +9,13 @@ Here are the credentials for some users:
 -   Email: admin@example.com / Password: 123456789
 -   Email: bob@esi.dz / Password: 123456789
 
+## How to launch the app
+
+-   Launch the migrations and the seeders
+-   Go to the websocket folder and launch the command `npm start`
+-   then finaly launch the command `php artisan serve`
+-   enjoy :)
+
 ## What you will find
 
 -   Jetstream Auth
