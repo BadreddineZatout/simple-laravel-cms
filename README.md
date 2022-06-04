@@ -1,6 +1,6 @@
-## Laravel Simple Cms
+## Laravel Simple CMS
 
-This is a simple content management system (CMS) created using Laravel & Livewire.
+This is a simple content management system (CMS) created using Laravel 9 & Livewire.
 
 ## Want to test it ?
 
