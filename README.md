@@ -12,7 +12,7 @@ Here are the credentials for some users:
 ## How to launch the app
 
 -   Start with `composer install` in the root folder & `npm install` in the websocket folder to install dependencies.
--   Launch the migrations and the seeders.
+-   Launch the migrations and the seeders `php artisan migrate --seed`.
 -   Go to the websocket folder and launch the command `npm start`.
 -   then finaly launch the command `php artisan serve`.
 
