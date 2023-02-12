@@ -21,5 +21,5 @@ Here are the credentials for some users:
 -   Jetstream Auth
 -   Many CRUDs (Pages CRUD, Users CRUD...)
 -   Role permissions managment
--   Notification push usign nodejs & web sockets
+-   Notification push using nodejs & web sockets
 -   Costume commande to create livewire CRUD components : `php artisan make:livewire:crud [class-name] [model-name]`
